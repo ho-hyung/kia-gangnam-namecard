@@ -18,6 +18,16 @@ export const metadata: Metadata = {
     type: "profile",
     locale: "ko_KR",
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "이진우 | 기아 강남대",
+  },
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
+  },
 }
 
 export const viewport: Viewport = {

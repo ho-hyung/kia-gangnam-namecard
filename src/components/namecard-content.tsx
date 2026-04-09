@@ -91,7 +91,7 @@ export function NamecardContent() {
 
   return (
     <div
-      className={`flex min-h-dvh flex-col items-center justify-center px-5 py-6 transition-colors duration-300 ${t.bg}`}
+      className={`safe-area flex min-h-dvh flex-col items-center justify-center px-5 py-6 transition-colors duration-300 select-none ${t.bg}`}
     >
       {/* Toggle Button */}
       <button
@@ -145,10 +145,10 @@ export function NamecardContent() {
             </p>
 
             {/* M, T, F, E format */}
-            <div className="mt-3 space-y-1.5 pt-1">
+            <div className="mt-3 space-y-0.5 pt-1 select-text">
               <a
                 href={`tel:${owner.mobile}`}
-                className="flex items-baseline gap-3 text-[15px] active:text-red-600"
+                className="-mx-2 flex items-baseline gap-3 rounded-lg px-2 py-1.5 text-[15px] active:bg-black/5 dark:active:bg-white/5"
               >
                 <span
                   className={`w-3.5 font-bold transition-colors duration-300 ${t.label}`}
@@ -163,7 +163,7 @@ export function NamecardContent() {
               </a>
               <a
                 href={`tel:${owner.phone}`}
-                className="flex items-baseline gap-3 text-[15px] active:text-red-600"
+                className="-mx-2 flex items-baseline gap-3 rounded-lg px-2 py-1.5 text-[15px] active:bg-black/5 dark:active:bg-white/5"
               >
                 <span
                   className={`w-3.5 font-bold transition-colors duration-300 ${t.label}`}
@@ -176,7 +176,7 @@ export function NamecardContent() {
                   {owner.phone.replace(/-/g, ".")}
                 </span>
               </a>
-              <div className="flex items-baseline gap-3 text-[15px]">
+              <div className="-mx-2 flex items-baseline gap-3 rounded-lg px-2 py-1.5 text-[15px]">
                 <span
                   className={`w-3.5 font-bold transition-colors duration-300 ${t.label}`}
                 >
@@ -190,7 +190,7 @@ export function NamecardContent() {
               </div>
               <a
                 href={`mailto:${owner.email}`}
-                className="flex items-baseline gap-3 text-[15px] active:text-red-600"
+                className="-mx-2 flex items-baseline gap-3 rounded-lg px-2 py-1.5 text-[15px] active:bg-black/5 dark:active:bg-white/5"
               >
                 <span
                   className={`w-3.5 font-bold transition-colors duration-300 ${t.label}`}
@@ -262,16 +262,16 @@ export function NamecardContent() {
       <div className="mt-3 grid w-full max-w-sm grid-cols-2 gap-2.5">
         <button
           onClick={generateVCard}
-          className={`flex items-center justify-center gap-1.5 rounded-lg py-3 text-sm font-semibold transition-colors duration-300 ${t.btn}`}
+          className={`flex min-h-[48px] items-center justify-center gap-1.5 rounded-lg text-sm font-semibold transition-colors duration-300 ${t.btn}`}
         >
-          <UserPlus className="h-3.5 w-3.5" />
+          <UserPlus className="h-4 w-4" />
           연락처 저장
         </button>
         <button
           onClick={handleShare}
-          className={`flex items-center justify-center gap-1.5 rounded-lg py-3 text-sm font-semibold transition-colors duration-300 ${t.btn}`}
+          className={`flex min-h-[48px] items-center justify-center gap-1.5 rounded-lg text-sm font-semibold transition-colors duration-300 ${t.btn}`}
         >
-          <Share2 className="h-3.5 w-3.5" />
+          <Share2 className="h-4 w-4" />
           명함 공유
         </button>
       </div>
