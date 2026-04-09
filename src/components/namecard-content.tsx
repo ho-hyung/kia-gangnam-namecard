@@ -93,12 +93,6 @@ export function NamecardContent() {
   const t = theme[mode]
 
   const handleShare = useCallback(async () => {
-    // 카카오톡 인앱 브라우저는 Web Share API 미지원 → 외부 브라우저로 열기
-    if (/KAKAOTALK/i.test(navigator.userAgent)) {
-      location.href = `kakaotalk://web/openExternal?url=${encodeURIComponent(owner.namecardUrl)}`
-      return
-    }
-
     if (navigator.share) {
       try {
         await navigator.share({
@@ -122,29 +116,29 @@ export function NamecardContent() {
     <div
       className={`safe-area flex min-h-dvh flex-col items-center justify-center px-5 py-6 transition-colors duration-300 select-none ${t.bg}`}
     >
-      {/* Toggle Button */}
-      <button
-        onClick={() => setMode(mode === "light" ? "dark" : "light")}
-        className={`mb-4 flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[11px] font-medium transition-colors ${t.toggleBtn}`}
-        aria-label="테마 변경"
-      >
-        {mode === "light" ? (
-          <>
-            <Moon className="h-3 w-3" />
-            Dark
-          </>
-        ) : (
-          <>
-            <Sun className="h-3 w-3" />
-            Light
-          </>
-        )}
-      </button>
-
       {/* ── Business Card ── */}
       <div
         className={`relative w-full max-w-sm overflow-hidden rounded-lg transition-colors duration-300 ${t.card}`}
       >
+        {/* Toggle Button */}
+        <button
+          onClick={() => setMode(mode === "light" ? "dark" : "light")}
+          className={`absolute top-4 right-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${t.toggleBtn}`}
+          aria-label="테마 변경"
+        >
+          {mode === "light" ? (
+            <>
+              <Moon className="h-3 w-3" />
+              Dark
+            </>
+          ) : (
+            <>
+              <Sun className="h-3 w-3" />
+              Light
+            </>
+          )}
+        </button>
+
         {/* Diagonal accent line */}
         <div
           className="pointer-events-none absolute top-0 right-0 h-full w-full"
