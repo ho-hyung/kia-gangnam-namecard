@@ -51,21 +51,16 @@ body {
 }
 
 .animate-fade-up {
-  animation: fade-up 0.6s ease-out both;
+  animation: fade-up 2s ease-out both;
 }
 
 @keyframes shimmer {
-  0%,
+  0% {
+    transform: translateX(-100%) translateY(-100%);
+  }
   100% {
-    opacity: 1;
+    transform: translateX(100%) translateY(100%);
   }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-.animate-shimmer {
-  animation: shimmer 4s ease-in-out infinite;
 }
 
 /* ── View Transition: circular reveal ── */

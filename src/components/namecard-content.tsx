@@ -136,9 +136,22 @@ export function NamecardContent() {
 
         {/* Diagonal accent line */}
         <div
-          className="animate-shimmer pointer-events-none absolute top-0 right-0 h-full w-full"
+          className="pointer-events-none absolute top-0 right-0 h-full w-full"
           style={{ background: t.diagonal }}
-        />
+        >
+          <div
+            className="absolute inset-0 overflow-hidden"
+          >
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(155deg, transparent 20%, rgba(255,255,255,0.08) 28%, rgba(255,255,255,0.15) 29%, rgba(255,255,255,0.08) 30%, transparent 38%)",
+                animation: "shimmer 5s ease-in-out infinite",
+              }}
+            />
+          </div>
+        </div>
 
         {/* Card content */}
         <div className="relative z-10 px-7 py-8">
