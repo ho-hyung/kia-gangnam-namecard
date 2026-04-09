@@ -5,7 +5,11 @@ export const alt = "이진우 | 기아 자동차 강남대 대리점 대표"
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 
-export default function OgImage() {
+export default async function OgImage() {
+  const fontData = await fetch(
+    "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/public/static/Pretendard-Bold.subset.woff"
+  ).then((res) => res.arrayBuffer())
+
   return new ImageResponse(
     (
       <div
@@ -17,28 +21,21 @@ export default function OgImage() {
           justifyContent: "center",
           alignItems: "center",
           background: "#05141F",
-          fontFamily: "sans-serif",
+          fontFamily: "Pretendard",
         }}
       >
-        {/* KIA Logo */}
-        <svg
-          viewBox="0 0 102.6 51.3"
-          width="160"
-          height="80"
-          style={{ marginBottom: 32 }}
+        {/* KIA text logo */}
+        <div
+          style={{
+            fontSize: 64,
+            fontWeight: 700,
+            color: "#ffffff",
+            letterSpacing: "0.15em",
+            marginBottom: 32,
+          }}
         >
-          <path
-            fill="#ffffff"
-            d="M59.1,35.2c0,0.2,0.1,0.3,0.2,0.3c0.1,0,0.2,0,0.2-0.1L91,14.9c0.6-0.4,1.1-0.6,1.8-0.6h6.9
-            c1.1,0,1.8,0.7,1.8,1.8v13.2c0,1.6-0.4,2.5-1.8,3.4l-8.4,5c-0.1,0.1-0.2,0.1-0.3,0.1c-0.1,0-0.2-0.1-0.2-0.4V22
-            c0-0.2-0.1-0.3-0.2-0.3s-0.2,0-0.2,0.1l-23,15c-0.6,0.4-1.2,0.5-1.8,0.5H50.4c-1.1,0-1.8-0.7-1.8-1.8v-19c0-0.1-0.1-0.3-0.2-0.3
-            c-0.1,0-0.2,0-0.2,0.1L33,25.5c-0.2,0.1-0.2,0.2-0.2,0.2c0,0.1,0,0.1,0.1,0.2l10.8,10.8c0.1,0.1,0.2,0.3,0.2,0.4
-            c0,0.1-0.2,0.2-0.3,0.2h-9.8c-0.8,0-1.4-0.1-1.8-0.5l-6.6-6.6c-0.1-0.1-0.1-0.1-0.2-0.1s-0.1,0-0.2,0.1l-11,6.6
-            c-0.7,0.4-1.1,0.5-1.8,0.5H2.3c-1.1,0-1.8-0.7-1.8-1.8v-13c0-1.6,0.4-2.5,1.8-3.4l8.4-5.1c0.1-0.1,0.2-0.1,0.2-0.1
-            c0.1,0,0.2,0.1,0.2,0.4v17.3c0,0.2,0.1,0.3,0.2,0.3c0.1,0,0.2,0,0.3-0.1l28.5-17.2c0.7-0.4,1.1-0.5,1.9-0.5h15.4
-            c1.1,0,1.8,0.7,1.8,1.8v19.3H59.1z"
-          />
-        </svg>
+          KIA
+        </div>
 
         {/* Red Line */}
         <div
@@ -47,6 +44,7 @@ export default function OgImage() {
             height: 3,
             background: "#BB162B",
             marginBottom: 36,
+            display: "flex",
           }}
         />
 
@@ -93,10 +91,21 @@ export default function OgImage() {
             right: 0,
             height: 4,
             background: "#BB162B",
+            display: "flex",
           }}
         />
       </div>
     ),
-    { ...size }
+    {
+      ...size,
+      fonts: [
+        {
+          name: "Pretendard",
+          data: fontData,
+          style: "normal",
+          weight: 700,
+        },
+      ],
+    }
   )
 }
