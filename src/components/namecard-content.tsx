@@ -19,13 +19,9 @@ function generateVCard() {
     "END:VCARD",
   ].join("\n")
 
-  const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" })
-  const url = URL.createObjectURL(blob)
-  const link = document.createElement("a")
-  link.href = url
-  link.download = `${owner.name}_기아_강남대대리점.vcf`
-  link.click()
-  URL.revokeObjectURL(url)
+  // data: URI 방식 → 모바일에서 연락처 앱으로 바로 연결
+  const dataUri = `data:text/vcard;charset=utf-8,${encodeURIComponent(vcard)}`
+  window.location.href = dataUri
 }
 
 async function copyToClipboard(url: string) {
