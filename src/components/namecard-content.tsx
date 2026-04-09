@@ -19,9 +19,15 @@ function generateVCard() {
     "END:VCARD",
   ].join("\n")
 
-  // data: URI 방식 → 모바일에서 연락처 앱으로 바로 연결
-  const dataUri = `data:text/vcard;charset=utf-8,${encodeURIComponent(vcard)}`
-  window.location.href = dataUri
+  const blob = new Blob([vcard], { type: "text/vcard" })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement("a")
+  a.href = url
+  a.download = `${owner.name}.vcf`
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
 }
 
 async function copyToClipboard(url: string) {
