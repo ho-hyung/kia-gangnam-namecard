@@ -93,6 +93,12 @@ export function NamecardContent() {
   const t = theme[mode]
 
   const handleShare = useCallback(async () => {
+    // 카카오톡 인앱 브라우저는 Web Share API 미지원 → 외부 브라우저로 열기
+    if (/KAKAOTALK/i.test(navigator.userAgent)) {
+      location.href = `kakaotalk://web/openExternal?url=${encodeURIComponent(owner.namecardUrl)}`
+      return
+    }
+
     if (navigator.share) {
       try {
         await navigator.share({
