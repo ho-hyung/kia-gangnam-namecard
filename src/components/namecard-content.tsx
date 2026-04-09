@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { UserPlus, Share2, Sun, Moon } from "lucide-react"
+import { useState, useCallback } from "react"
+import { UserPlus, Share2, Sun, Moon, Check } from "lucide-react"
 import { KiaLogo } from "@/components/kia-logo"
 import { owner } from "@/data/owner"
 
@@ -28,19 +28,21 @@ function generateVCard() {
   URL.revokeObjectURL(url)
 }
 
-async function handleShare() {
-  if (navigator.share) {
-    try {
-      await navigator.share({
-        title: `${owner.name} | ${owner.company}`,
-        text: `${owner.company} ${owner.position} ${owner.name}`,
-        url: owner.namecardUrl,
-      })
-    } catch {
-      // User cancelled
-    }
-  } else {
-    await navigator.clipboard.writeText(owner.namecardUrl)
+async function copyToClipboard(url: string) {
+  try {
+    await navigator.clipboard.writeText(url)
+    return true
+  } catch {
+    // Fallback for older browsers
+    const textarea = document.createElement("textarea")
+    textarea.value = url
+    textarea.style.position = "fixed"
+    textarea.style.opacity = "0"
+    document.body.appendChild(textarea)
+    textarea.select()
+    document.execCommand("copy")
+    document.body.removeChild(textarea)
+    return true
   }
 }
 
@@ -87,7 +89,28 @@ const theme = {
 
 export function NamecardContent() {
   const [mode, setMode] = useState<"light" | "dark">("light")
+  const [copied, setCopied] = useState(false)
   const t = theme[mode]
+
+  const handleShare = useCallback(async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `${owner.name} | ${owner.company}`,
+          text: `${owner.company} ${owner.position} ${owner.name}`,
+          url: owner.namecardUrl,
+        })
+        return
+      } catch {
+        // User cancelled or share failed — fall through to clipboard
+      }
+    }
+    const success = await copyToClipboard(owner.namecardUrl)
+    if (success) {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
+  }, [])
 
   return (
     <div
@@ -271,8 +294,17 @@ export function NamecardContent() {
           onClick={handleShare}
           className={`flex min-h-[48px] items-center justify-center gap-1.5 rounded-lg text-sm font-semibold transition-colors duration-300 ${t.btn}`}
         >
-          <Share2 className="h-4 w-4" />
-          명함 공유
+          {copied ? (
+            <>
+              <Check className="h-4 w-4" />
+              링크 복사됨
+            </>
+          ) : (
+            <>
+              <Share2 className="h-4 w-4" />
+              명함 공유
+            </>
+          )}
         </button>
       </div>
     </div>
