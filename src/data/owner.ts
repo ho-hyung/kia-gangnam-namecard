@@ -1,7 +1,7 @@
 export const owner = {
   name: "이진우",
   position: "대표",
-  company: "기아 자동차 강남대 대리점",
+  company: "기아(주)강남대대리점",
   phone: "031-284-0888",
   mobile: "010-5350-3153",
   email: "kiawjl@hanmail.net",

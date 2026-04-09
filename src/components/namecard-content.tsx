@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useCallback, type MouseEvent } from "react"
 import { Phone, Share2, Sun, Moon, Check } from "lucide-react"
 import { KiaLogo } from "@/components/kia-logo"
 import { owner } from "@/data/owner"
@@ -70,6 +70,23 @@ export function NamecardContent() {
   const [copied, setCopied] = useState(false)
   const t = theme[mode]
 
+  const toggleTheme = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    const update = () => setMode((prev) => (prev === "light" ? "dark" : "light"))
+
+    if (!document.startViewTransition) {
+      update()
+      return
+    }
+
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = rect.left + rect.width / 2
+    const y = rect.top + rect.height / 2
+    document.documentElement.style.setProperty("--toggle-x", `${x}px`)
+    document.documentElement.style.setProperty("--toggle-y", `${y}px`)
+
+    document.startViewTransition(update)
+  }, [])
+
   const handleShare = useCallback(async () => {
     if (navigator.share) {
       try {
@@ -96,11 +113,11 @@ export function NamecardContent() {
     >
       {/* ── Business Card ── */}
       <div
-        className={`relative w-full max-w-sm overflow-hidden rounded-lg transition-colors duration-300 ${t.card}`}
+        className={`animate-fade-up relative w-full max-w-sm overflow-hidden rounded-lg transition-colors duration-300 ${t.card}`}
       >
         {/* Toggle Button */}
         <button
-          onClick={() => setMode(mode === "light" ? "dark" : "light")}
+          onClick={toggleTheme}
           className={`absolute top-4 right-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${t.toggleBtn}`}
           aria-label="테마 변경"
         >
@@ -119,7 +136,7 @@ export function NamecardContent() {
 
         {/* Diagonal accent line */}
         <div
-          className="pointer-events-none absolute top-0 right-0 h-full w-full"
+          className="animate-shimmer pointer-events-none absolute top-0 right-0 h-full w-full"
           style={{ background: t.diagonal }}
         />
 
@@ -137,7 +154,7 @@ export function NamecardContent() {
             <p
               className={`text-[15px] font-medium transition-colors duration-300 ${t.primary}`}
             >
-              강남대대리점
+              기아(주)강남대대리점
             </p>
             <p
               className={`text-[15px] font-bold transition-colors duration-300 ${t.primary}`}
@@ -243,7 +260,8 @@ export function NamecardContent() {
 
       {/* ── Greeting + Hours ── */}
       <div
-        className={`mt-4 w-full max-w-sm rounded-lg px-6 py-4 transition-colors duration-300 ${t.sub}`}
+        className={`animate-fade-up mt-4 w-full max-w-sm rounded-lg px-6 py-4 transition-colors duration-300 ${t.sub}`}
+        style={{ animationDelay: "0.15s" }}
       >
         <p
           className={`text-center text-[13px] leading-relaxed transition-colors duration-300 ${t.subText}`}
@@ -260,7 +278,7 @@ export function NamecardContent() {
       </div>
 
       {/* ── Save / Share ── */}
-      <div className="mt-3 grid w-full max-w-sm grid-cols-2 gap-2.5">
+      <div className="animate-fade-up mt-3 grid w-full max-w-sm grid-cols-2 gap-2.5" style={{ animationDelay: "0.25s" }}>
         <button
           onClick={() => { window.location.href = `tel:${owner.mobile}` }}
           className={`flex min-h-[48px] items-center justify-center gap-1.5 rounded-lg text-sm font-semibold transition-colors duration-300 ${t.btn}`}

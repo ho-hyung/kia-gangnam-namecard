@@ -9,19 +9,19 @@ const geist = Geist({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kia-pearl.vercel.app"),
-  title: "이진우 | 기아 자동차 강남대 대리점 대표",
+  title: "이진우 | 기아(주)강남대대리점 대표",
   description:
-    "기아 자동차 강남대 대리점 대표 이진우입니다. 차량 상담 및 시승 예약을 도와드립니다.",
+    "기아(주)강남대대리점 대표 이진우입니다. 차량 상담 및 시승 예약을 도와드립니다.",
   openGraph: {
-    title: "이진우 | 기아 강남대 대리점 대표",
-    description: "기아 자동차 강남대 대리점 대표 명함",
+    title: "이진우 | 기아(주)강남대대리점 대표",
+    description: "기아(주)강남대대리점 대표 명함",
     type: "profile",
     locale: "ko_KR",
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "이진우 | 기아 강남대",
+    title: "이진우 | 기아(주)강남대대리점",
   },
   formatDetection: {
     telephone: true,

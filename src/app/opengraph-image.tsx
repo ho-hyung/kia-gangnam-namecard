@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og"
 
 export const runtime = "edge"
-export const alt = "이진우 | 기아 자동차 강남대 대리점 대표"
+export const alt = "이진우 | 기아(주)강남대대리점 대표"
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 
@@ -80,7 +80,7 @@ export default async function OgImage() {
             color: "rgba(255,255,255,0.5)",
           }}
         >
-          기아 자동차 강남대 대리점
+          기아(주)강남대대리점
         </div>
 
         {/* Bottom bar */}
