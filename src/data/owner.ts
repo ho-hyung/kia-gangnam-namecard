@@ -15,5 +15,5 @@ export const owner = {
   fax: "031-275-6116",
   website: "www.kia.com",
   zipcode: "17073",
-  namecardUrl: "https://kia-gangnam.com/namecard",
+  namecardUrl: "https://kia-pearl.vercel.app",
 } as const

@@ -8,7 +8,7 @@ const geist = Geist({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.kia.com"),
+  metadataBase: new URL("https://kia-pearl.vercel.app"),
   title: "이진우 | 기아 자동차 강남대 대리점 대표",
   description:
     "기아 자동차 강남대 대리점 대표 이진우입니다. 차량 상담 및 시승 예약을 도와드립니다.",
