@@ -7,7 +7,7 @@ export const contentType = "image/png"
 
 export default async function OgImage() {
   const fontData = await fetch(
-    "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard/dist/public/static/Pretendard-Bold.subset.woff"
+    "https://cdn.jsdelivr.net/fontsource/fonts/noto-sans-kr@latest/korean-700-normal.woff"
   ).then((res) => res.arrayBuffer())
 
   return new ImageResponse(
@@ -21,7 +21,7 @@ export default async function OgImage() {
           justifyContent: "center",
           alignItems: "center",
           background: "#05141F",
-          fontFamily: "Pretendard",
+          fontFamily: "NotoSansKR",
         }}
       >
         {/* KIA text logo */}
@@ -100,12 +100,12 @@ export default async function OgImage() {
       ...size,
       fonts: [
         {
-          name: "Pretendard",
+          name: "NotoSansKR",
           data: fontData,
           style: "normal",
           weight: 700,
         },
       ],
-    }
+    },
   )
 }
