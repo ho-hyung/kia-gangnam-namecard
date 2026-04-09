@@ -66,7 +66,7 @@ const theme = {
 } as const
 
 export function NamecardContent() {
-  const [mode, setMode] = useState<"light" | "dark">("light")
+  const [mode, setMode] = useState<"light" | "dark">("dark")
   const [copied, setCopied] = useState(false)
   const t = theme[mode]
 
