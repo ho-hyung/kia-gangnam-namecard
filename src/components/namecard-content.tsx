@@ -1,34 +1,10 @@
 "use client"
 
 import { useState, useCallback } from "react"
-import { UserPlus, Share2, Sun, Moon, Check } from "lucide-react"
+import { Phone, Share2, Sun, Moon, Check } from "lucide-react"
 import { KiaLogo } from "@/components/kia-logo"
 import { owner } from "@/data/owner"
 
-function generateVCard() {
-  const vcard = [
-    "BEGIN:VCARD",
-    "VERSION:3.0",
-    `FN:${owner.name}`,
-    `ORG:${owner.company}`,
-    `TITLE:${owner.position}`,
-    `TEL;TYPE=WORK:${owner.phone}`,
-    `TEL;TYPE=CELL:${owner.mobile}`,
-    `EMAIL:${owner.email}`,
-    `ADR;TYPE=WORK:;;${owner.address};;;;`,
-    "END:VCARD",
-  ].join("\n")
-
-  const blob = new Blob([vcard], { type: "text/vcard" })
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement("a")
-  a.href = url
-  a.download = `${owner.name}.vcf`
-  document.body.appendChild(a)
-  a.click()
-  document.body.removeChild(a)
-  URL.revokeObjectURL(url)
-}
 
 async function copyToClipboard(url: string) {
   try {
@@ -286,11 +262,11 @@ export function NamecardContent() {
       {/* ── Save / Share ── */}
       <div className="mt-3 grid w-full max-w-sm grid-cols-2 gap-2.5">
         <button
-          onClick={generateVCard}
+          onClick={() => { window.location.href = `tel:${owner.mobile}` }}
           className={`flex min-h-[48px] items-center justify-center gap-1.5 rounded-lg text-sm font-semibold transition-colors duration-300 ${t.btn}`}
         >
-          <UserPlus className="h-4 w-4" />
-          연락처 저장
+          <Phone className="h-4 w-4" />
+          전화문의
         </button>
         <button
           onClick={handleShare}
